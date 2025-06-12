@@ -11,21 +11,18 @@ export const App = () => {
     priority: "",
   });
   const [tasks, setTasks] = useState([]);
-
-  let setTaskinLS;
+  const [selectedTab, setSelectedTab] = useState("All");
 
   useEffect(() => {
     if (tasks.length == 0) return;
 
-    setTaskinLS = localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   useEffect(() => {
-    if (setTaskinLS) {
-      const getTasksfromLS = JSON.parse(localStorage.getItem("tasks") || []);
+    const getTasksfromLS = JSON.parse(localStorage.getItem("tasks") || []);
 
-      setTasks(getTasksfromLS);
-    }
+    setTasks(getTasksfromLS);
   }, []);
 
   const deleteTask = (index) => {
@@ -72,7 +69,7 @@ export const App = () => {
         <img
           src={addicon}
           alt="add-icon"
-          className="h-[40px] md:h-[45px] ms-1 md:ms-2"
+          className="h-[35px] mt-1 md:mt-0 md:h-[45px] ms-1 md:ms-2"
           onClick={() => {
             if (!newtask.task || !newtask.priority) {
               toast.error("Please enter task and select priority");
@@ -89,19 +86,50 @@ export const App = () => {
       </div>
 
       <div className="h-[450px] w-[250px] md:w-[800px] md:h-[500px] b-cyan-300 overflow-y-scroll block mx-auto mt-5 py-2 md:py-5 bg-emerald-400 shadow-2xl rounded-lg">
-        <div>
-          {tasks.map((taskitem, index) => {
-            const { task, priority } = taskitem;
+        <div className="flex justify-center my-2">
+          {["All", "High", "Medium", "Low"].map((tab, i) => {
             return (
-              <ToDoCard
-                task={task}
-                priority={priority}
-                key={index}
-                index={index}
-                deleteTask={deleteTask}
-              />
+              <span
+                className={`px-1 md:px-3 py-[2px] md:py-1 text-sm md:font-medium mx-1 md:mx-3 w-[85px] text-center rounded-xl shadow-lg cursor-pointer ${
+                  tab == selectedTab ? "bg-teal-400 text-white" : "bg-teal-100"
+                }`}
+                key={i}
+                onClick={() => {
+                  setSelectedTab(tab);
+                }}
+              >
+                {tab}
+              </span>
             );
           })}
+        </div>
+        <div>
+          {tasks
+            .filter(
+              (newtask) =>
+                selectedTab === "All" ||
+                newtask.priority.toLowerCase() == selectedTab.toLowerCase()
+            )
+            .map((taskitem, index) => {
+              const { task, priority } = taskitem;
+
+              /* if (
+                selectedTab != "All" &&
+                priority.toLowerCase() != selectedTab.toLowerCase()
+              ) {
+                return null;
+              } */
+
+              return (
+                <ToDoCard
+                  task={task}
+                  priority={priority}
+                  key={index}
+                  index={index}
+                  deleteTask={deleteTask}
+                />
+              );
+            })}
         </div>
       </div>
       <Toaster />
