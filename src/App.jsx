@@ -20,7 +20,7 @@ export const App = () => {
   }, [tasks]);
 
   useEffect(() => {
-    const getTasksfromLS = JSON.parse(localStorage.getItem("tasks") || []);
+    const getTasksfromLS = JSON.parse(localStorage.getItem("tasks") || "[]");
 
     setTasks(getTasksfromLS);
   }, []);
@@ -81,6 +81,7 @@ export const App = () => {
               priority: "",
             });
             toast.success("Task added successfully");
+            setSelectedTab("All");
           }}
         />
       </div>
