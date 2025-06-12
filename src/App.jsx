@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import addicon from "./assets/addicon.png";
 import todolisticon from "./assets/todolisticon.png";
 import { ToDoCard } from "./ToDoCard";
-import tasksimg from "./assets/tasks.png";
 import toast, { Toaster } from "react-hot-toast";
 
 export const App = () => {
   const [newtask, setNewTask] = useState({
     task: "",
     priority: "",
+    category: "",
   });
   const [tasks, setTasks] = useState([]);
   const [selectedTab, setSelectedTab] = useState("All");
@@ -62,16 +62,37 @@ export const App = () => {
           }}
         >
           <option value="">Select Priority</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
+          <option value="high">📈High</option>
+          <option value="medium">📊Medium</option>
+          <option value="low">📉Low</option>
+        </select>
+        <select
+          className="w-1/4 md:w-1/6 border-2 border-gray-400 my-2 px-1 md:px-5 py-1 rounded-lg shadow-md ms-2 focus:outline-none"
+          value={newtask.category}
+          onChange={(e) => {
+            setNewTask({ 
+              ...newtask, 
+              category: e.target.value,
+            });
+          }}
+        >
+          <option value="">Select Category</option>
+          <option value="learning">🎯Learning</option>
+          <option value="work">💪🏻Work</option>
+          <option value="food">🍜Food</option>
+          <option value="expense">🛒Expense</option>
+          <option value="health">🌱Health</option>
+          <option value="travel">✈️Travel</option>
+          <option value="code">👩🏻‍💻Code</option>
+          <option value="college">🎓College</option>
+          <option value="other">🎀Other</option>
         </select>
         <img
           src={addicon}
           alt="add-icon"
           className="h-[35px] mt-1 md:mt-0 md:h-[45px] ms-1 md:ms-2"
           onClick={() => {
-            if (!newtask.task || !newtask.priority) {
+            if (!newtask.task || !newtask.priority || !newtask.category) {
               toast.error("Please enter task and select priority");
               return;
             }
@@ -79,6 +100,7 @@ export const App = () => {
             setNewTask({
               task: "",
               priority: "",
+              category: ""
             });
             toast.success("Task added successfully");
             setSelectedTab("All");
@@ -86,12 +108,12 @@ export const App = () => {
         />
       </div>
 
-      <div className="h-[450px] w-[250px] md:w-[800px] md:h-[500px] b-cyan-300 overflow-y-scroll block mx-auto mt-5 py-2 md:py-5 bg-emerald-400 shadow-2xl rounded-lg">
-        <div className="flex justify-center my-2">
+      <div className="h-[480px] w-[300px] md:w-[800px] md:h-[500px] b-cyan-300 overflow-y-scroll block mx-auto mt-5 py-2 md:py-5 bg-emerald-400 shadow-2xl rounded-lg">
+        <div className="flex justify-center m-2">
           {["All", "High", "Medium", "Low"].map((tab, i) => {
             return (
               <span
-                className={`px-1 md:px-3 py-[2px] md:py-1 text-sm md:font-medium mx-1 md:mx-3 w-[85px] text-center rounded-xl shadow-lg cursor-pointer ${
+                className={`px-1 md:px-3 py-[2px] md:py-1 text-sm md:font-medium mx-1 md:mx-3 w-[70px] md:w-[85px] text-center rounded-lg shadow-lg cursor-pointer ${
                   tab == selectedTab ? "bg-teal-400 text-white" : "bg-teal-100"
                 }`}
                 key={i}
@@ -112,7 +134,7 @@ export const App = () => {
                 newtask.priority.toLowerCase() == selectedTab.toLowerCase()
             )
             .map((taskitem, index) => {
-              const { task, priority } = taskitem;
+              const { task, priority, category } = taskitem;
 
               /* if (
                 selectedTab != "All" &&
@@ -125,6 +147,7 @@ export const App = () => {
                 <ToDoCard
                   task={task}
                   priority={priority}
+                  category={category}
                   key={index}
                   index={index}
                   deleteTask={deleteTask}
