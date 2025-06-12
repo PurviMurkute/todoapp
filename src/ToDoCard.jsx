@@ -10,7 +10,7 @@ export const ToDoCard = ({task, priority, category, deleteTask, index}) => {
 
   return (
     <div
-      className={`border-2 py-2 px-4 my-5 border-white block mx-auto w-[220px] md:w-[600px] rounded-xl shadow-lg text-teal-800 relative ${PRIORITY_CLASSES[priority]}`}
+      className={`border-2 py-2 px-4 my-5 border-white block mx-auto w-[260px] md:w-[600px] rounded-xl shadow-lg text-teal-800 relative ${PRIORITY_CLASSES[priority]}`}
     >
       <h2 className="font-bold text-lg">{task}</h2>
       <>
