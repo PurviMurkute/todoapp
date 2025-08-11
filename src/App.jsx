@@ -34,7 +34,7 @@ export const App = () => {
 
   return (
     <div className="min-h-screen bg-teal-100">
-      <h1 className="flex justify-center text-teal-800 text-4xl font-bold mb-5 pt-5">
+      <h1 className="flex justify-center text-teal-800 text-2xl font-bold mb-5 pt-5">
         ToDoApp
         <img src={todolisticon} alt="icon" className="h-[50px]" />{" "}
       </h1>
@@ -70,8 +70,8 @@ export const App = () => {
           className="w-1/4 md:w-1/6 border-2 border-gray-400 my-2 px-1 md:px-5 py-1 rounded-lg shadow-md ms-2 focus:outline-none"
           value={newtask.category}
           onChange={(e) => {
-            setNewTask({ 
-              ...newtask, 
+            setNewTask({
+              ...newtask,
               category: e.target.value,
             });
           }}
@@ -90,7 +90,7 @@ export const App = () => {
         <img
           src={addicon}
           alt="add-icon"
-          className="h-[35px] mt-1 md:mt-0 md:h-[45px] ms-1 md:ms-2"
+          className="h-[35px] mt-1 md:mt-0 md:h-[45px] ms-1 md:ms-2 cursor-pointer"
           onClick={() => {
             if (!newtask.task || !newtask.priority || !newtask.category) {
               toast.error("Please enter task and select priority");
@@ -100,7 +100,7 @@ export const App = () => {
             setNewTask({
               task: "",
               priority: "",
-              category: ""
+              category: "",
             });
             toast.success("Task added successfully");
             setSelectedTab("All");
@@ -108,8 +108,8 @@ export const App = () => {
         />
       </div>
 
-      <div className="h-[480px] w-[300px] md:w-[800px] md:h-[500px] b-cyan-300 overflow-y-scroll block mx-auto mt-5 py-2 md:py-5 bg-emerald-400 shadow-2xl rounded-lg">
-        <div className="flex justify-center m-2">
+      <div className="h-[480px] w-[300px] md:w-[750px] md:h-[450px] b-cyan-300 overflow-y-scroll block mx-auto mt-5 py-2 md:py-5 bg-emerald-300 shadow-2xl rounded-lg">
+        <div className="flex justify-center mt-2 mb-5">
           {["All", "High", "Medium", "Low"].map((tab, i) => {
             return (
               <span
