@@ -49,10 +49,10 @@ export const App = () => {
               task: e.target.value,
             });
           }}
-          className="w-1/2 md:w-1/4 border-2 border-gray-400 my-2 px-1 md:px-5 py-1 rounded-lg shadow-md focus:outline-none"
+          className="w-1/2 md:w-1/4 bg-white my-2 px-1 md:px-5 py-1 rounded-lg shadow-md focus:outline-none"
         />
         <select
-          className="w-1/4 md:w-1/6 border-2 border-gray-400 my-2 px-1 md:px-5 py-1 rounded-lg shadow-md ms-2 focus:outline-none"
+          className="w-1/4 md:w-1/6 bg-white my-2 px-1 md:px-5 py-1 rounded-lg shadow-md ms-2 focus:outline-none"
           value={newtask.priority}
           onChange={(e) => {
             setNewTask({
@@ -67,7 +67,7 @@ export const App = () => {
           <option value="low">📉Low</option>
         </select>
         <select
-          className="w-1/4 md:w-1/6 border-2 border-gray-400 my-2 px-1 md:px-5 py-1 rounded-lg shadow-md ms-2 focus:outline-none"
+          className="w-1/4 md:w-1/6 bg-white my-2 px-1 md:px-5 py-1 rounded-lg shadow-md ms-2 focus:outline-none"
           value={newtask.category}
           onChange={(e) => {
             setNewTask({
@@ -108,7 +108,7 @@ export const App = () => {
         />
       </div>
 
-      <div className="h-[480px] w-[300px] md:w-[750px] md:h-[450px] b-cyan-300 overflow-y-scroll block mx-auto mt-5 py-2 md:py-5 bg-emerald-300 shadow-2xl rounded-lg">
+      <div className="h-[480px] w-[300px] md:w-[750px] md:h-[450px] b-cyan-300 overflow-y-scroll block mx-auto mt-5 py-2 md:py-5 bg-teal-600 shadow-2xl rounded-lg">
         <div className="flex justify-center mt-2 mb-5">
           {["All", "High", "Medium", "Low"].map((tab, i) => {
             return (
